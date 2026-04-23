@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Gbrnd-ux/my-college-tasks/main/assets/icon.png" alt="My College Tasks Logo" width="120" />
+  <img src="../todo_list/assets/logo.png" alt="My College Tasks Logo" width="120" />
   <h1>🎓 My College Tasks</h1>
   
   <p>
