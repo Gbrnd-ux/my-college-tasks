@@ -85,7 +85,6 @@
   </table>
 </div>
 
-> Add your own screenshots inside the `screenshots/` folder.
 
 ---
 
