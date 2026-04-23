@@ -42,6 +42,7 @@ class _AplikasiTugasMahasiswaState extends State<AplikasiTugasMahasiswa> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My College Tasks',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -115,6 +116,7 @@ class _HalamanDaftarTugasState extends State<HalamanDaftarTugas>
   String _queryPencarian = '';
   int _tabIndex = 0;
   bool _isLoading = true;
+  bool _isSearching = false;
 
   late TabController _tabController;
 
@@ -370,66 +372,70 @@ class _HalamanDaftarTugasState extends State<HalamanDaftarTugas>
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: _queryPencarian.isEmpty
-            ? LayoutBuilder(
-                builder: (context, constraints) {
-                  final fontSize = constraints.maxWidth < 250 ? 14.0 : (constraints.maxWidth < 300 ? 16.0 : 20.0);
-                  return Text(
-                    'Daftar Tugas',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  );
-                },
-              )
-            : TextField(
-                autofocus: true,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
-                decoration: InputDecoration(
-                  hintText: 'Cari...',
-                  hintStyle: GoogleFonts.poppins(color: Colors.white70, fontSize: 14),
-                  border: InputBorder.none,
-                  isDense: true,
-                  contentPadding: EdgeInsets.zero,
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    _queryPencarian = value;
-                    _perbaruiDaftarTampil();
-                  });
-                },
-              ),
+title: !_isSearching
+    ? LayoutBuilder(
+        builder: (context, constraints) {
+          final fontSize = constraints.maxWidth < 250 ? 14.0 : (constraints.maxWidth < 300 ? 16.0 : 20.0);
+          return Text(
+            'Daftar Tugas',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.poppins(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          );
+        },
+      )
+    : TextField(
+        autofocus: true,
+        style: const TextStyle(color: Colors.white, fontSize: 14),
+        decoration: InputDecoration(
+          hintText: 'Cari...',
+          hintStyle: GoogleFonts.poppins(color: Colors.white70, fontSize: 14),
+          border: InputBorder.none,
+          isDense: true,
+          contentPadding: EdgeInsets.zero,
+        ),
+        onChanged: (value) {
+          setState(() {
+            _queryPencarian = value;
+            _perbaruiDaftarTampil();
+          });
+        },
+      ),
         backgroundColor: const Color(0xFF6C63FF),
         foregroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          if (_queryPencarian.isEmpty)
-            IconButton(
-              icon: const Icon(Icons.search_rounded, size: 22),
-              onPressed: () {
-                setState(() {
-                  _queryPencarian = '';
-                });
-              },
-              padding: const EdgeInsets.all(8),
-              constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-            )
-          else
-            IconButton(
-              icon: const Icon(Icons.close_rounded, size: 22),
-              onPressed: () {
-                setState(() {
-                  _queryPencarian = '';
-                  _perbaruiDaftarTampil();
-                });
-              },
-              padding: const EdgeInsets.all(8),
-              constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-            ),
+       actions: [
+        if (!_isSearching)
+          IconButton(
+            icon: const Icon(Icons.search_rounded, size: 22),
+            onPressed: () {
+              setState(() {
+                _isSearching = true;
+                _queryPencarian = ''; // reset query
+              });
+            },
+            padding: const EdgeInsets.all(8),
+            constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+          )
+        else
+          IconButton(
+            icon: const Icon(Icons.close_rounded, size: 22),
+            onPressed: () {
+              setState(() {
+                _isSearching = false;
+                _queryPencarian = '';
+                _perbaruiDaftarTampil(); // kembalikan daftar tanpa filter
+              });
+            },
+            padding: const EdgeInsets.all(8),
+            constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+          ),
+        // ... tombol dark mode & popup menu tetap sama
+
           IconButton(
             icon: Icon(widget.isDarkMode ? Icons.dark_mode : Icons.light_mode, size: 22),
             onPressed: widget.onToggleTheme,
