@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="../todo_list/assets/logo.png" alt="My College Tasks Logo" width="120" />
+  <img src="/assets/logo.png" alt="My College Tasks Logo" width="120" />
   <h1>🎓 My College Tasks</h1>
   
   <p>
