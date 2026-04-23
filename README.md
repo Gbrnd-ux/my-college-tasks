@@ -89,7 +89,3 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - run: flutter build apk --release
-.
-
-📸 Cuplikan Layar
-<div align="center"> <table> <tr> <td><img src="screenshots/dashboard.png" width="200" alt="Dashboard"/></td> <td><img src="screenshots/list.png" width="200" alt="Daftar Tugas"/></td> <td><img src="screenshots/add.png" width="200" alt="Tambah Tugas"/></td> </tr> <tr align="center"> <td>📊 Dashboard</td> <td>📋 Daftar Tugas</td> <td>➕ Tambah/Edit</td> </tr> </table> </div>
