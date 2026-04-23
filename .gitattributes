@@ -1,0 +1,17 @@
+# Abaikan folder yang bukan kode Dart utama
+web/* linguist-vendored
+ios/* linguist-vendored
+android/* linguist-vendored
+linux/* linguist-vendored
+macos/* linguist-vendored
+windows/* linguist-vendored
+test/* linguist-vendored
+
+# Hanya hitung Dart sebagai bahasa utama
+*.dart linguist-detectable=true
+*.html linguist-detectable=false
+*.js linguist-detectable=false
+*.cpp linguist-detectable=false
+*.swift linguist-detectable=false
+*.cmake linguist-detectable=false
+*.kt linguist-detectable=false
